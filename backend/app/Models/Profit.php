@@ -10,8 +10,8 @@ class Profit extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title'
-        ,'subtitle',
+        'title',
+        'subtitle',
         'amount',
         'user_id'
     ];
