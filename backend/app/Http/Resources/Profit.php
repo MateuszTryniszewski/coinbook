@@ -20,8 +20,11 @@ class Profit extends JsonResource
             'subtitle' => $this->description,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
-            'user' => $this->user,
             'amount' => $this->amount,
+            'category_id' =>$this->category_id,
+            'category' => $this->category,
+            'user_id' =>$this->user_id,
+            'user' => $this->user,
         ];
     }
 }
