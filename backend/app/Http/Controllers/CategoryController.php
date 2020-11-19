@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Profit;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Resources\Profit as ProfitResource;
 
-class ProfitController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class ProfitController extends Controller
      */
     public function index()
     {
-        return ProfitResource::collection(Profit::with('category')->paginate(10));
+        return Category::all();
     }
 
     /**
@@ -26,46 +25,43 @@ class ProfitController extends Controller
      */
     public function store(Request $request)
     {
-        $profit = Profit::create([
-            'user_id' => $request->user()->id,
-            $request->all()
-        ]);        
-        return response()->json($profit, 201);
+        $category = Category::create($request->all());        
+        return response()->json($category, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Profit  $profit
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Profit $profit)
+    public function show(Category $category)
     {
-        return new ProfitResource($profit);
+        return Category::find($category);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Profit  $profit
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Profit $profit)
+    public function update(Request $request, Category $category)
     {
-        $profit->update($request->all());
-        return response()->json($profit, 200);
+        $category->update($request->all());
+        return response()->json($category, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Profit  $profit
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Profit $profit)
+    public function destroy(Category $category)
     {
-        $profit->delete();
+        $category->delete();        
         return response()->json(null, 204);
     }
 }
