@@ -26,10 +26,9 @@ class ProfitController extends Controller
      */
     public function store(Request $request)
     {
-        $profit = Profit::create([
-            'user_id' => $request->user()->id,
+        $profit = Profit::create(
             $request->all()
-        ]);        
+        );        
         return response()->json($profit, 201);
     }
 
