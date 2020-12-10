@@ -8,9 +8,10 @@ Api Done
 /api/profits
   - join with category and user
 
+/api/recurring expenses
+    - join with category and user
 
 In progress
 
-  - recurring expenses
   - view for summary
   - auth
