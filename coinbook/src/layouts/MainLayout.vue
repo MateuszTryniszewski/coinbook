@@ -11,97 +11,99 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
+      <p class="q-pl-md q-pt-md">Coinbook</p>
+      <p class="q-ml-md">{{ today }}</p>
+      <q-img
+        src="../assets/winter_1.jpg"
+        class="header-image absolute-top" />
     </q-header>
 
     <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-1"
-    >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Essential Links
-        </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
+        v-model="leftDrawerOpen"
+        show-if-above
+        :width="260"
+        :breakpoint="800"
+      >
+        <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
+          <q-list padding>
+            <q-item active clickable v-ripple>
+              <q-item-section avatar>
+                <q-icon name="star" />
+              </q-item-section>
+              <q-item-section>
+                Star
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-scroll-area>
+
+        <q-img class="absolute-top" src="../assets/mech.jpg" style="height: 150px">
+          <div class="absolute-bottom bg-transparent">
+            <q-avatar size="56px" class="q-mb-sm">
+              <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+            </q-avatar>
+            <div class="text-weight-bold">Mateusz Tryniszewski</div>
+            <div>github</div>
+          </div>
+        </q-img>
+      </q-drawer>
 
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <div class="fixed-bottom justify-center lt-sm bg-blue-grey-1">
+      <q-list class="row justify-around">
+        <q-item clickable class="q-pa-md">
+          <q-item-section>
+            <q-icon size="lg" name="fas fa-home text-light-blue-7" />
+          </q-item-section>
+        </q-item>
+        <q-item clickable class="q-pa-md">
+          <q-item-section>
+            <q-icon size="lg" name="fas fa-money-bill text-blue-grey-10" />
+          </q-item-section>
+        </q-item>
+        <q-item clickable class="q-pa-md">
+          <q-item-section>
+            <q-icon size="lg" name="far fa-credit-card text-blue-grey-10" />
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </div>
+
   </q-layout>
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksData = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
+import { date } from 'quasar'
 
 export default {
   name: 'MainLayout',
-  components: { EssentialLink },
-  data () {
+  data() {
     return {
-      leftDrawerOpen: false,
-      essentialLinks: linksData
+      leftDrawerOpen: false
+    }
+  },
+
+  computed: {
+    today() {
+      const timeStamp = Date.now()
+      const formattedString = date.formatDate(timeStamp, 'dddd - DD MM')
+      return formattedString
     }
   }
 }
 </script>
+
+<style lang="scss">
+  .q-header{
+    height: 150px;
+  }
+  .header-image {
+    height: 100%;
+    z-index: -1;
+    opacity: 0.03;
+  }
+</style>
